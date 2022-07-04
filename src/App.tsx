@@ -1,4 +1,5 @@
-import { ChangeEventHandler, FC, FormEventHandler, useState, VFC } from 'react';
+import { invoke } from '@tauri-apps/api/tauri';
+import { ChangeEventHandler, FC, FormEventHandler, useState } from 'react';
 
 type Task = {
   task: string;
@@ -50,6 +51,8 @@ const TodoList: FC = () => {
     });
     setTodoList(newTodos);
   };
+
+  invoke('simple_command');
 
   return (
     <div>
