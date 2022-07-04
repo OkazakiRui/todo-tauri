@@ -33,6 +33,15 @@ fn command_with_object(message: MyMessage) -> MyMessage {
     }
 }
 
+#[tauri::command]
+fn command_with_error(arg: u32) -> Result<String, String> {
+    if arg % 2 == 0 {
+        Ok(format!("even value {}", arg))
+    } else {
+        Err(format!("odd value {}", arg))
+    }
+}
+
 fn main() {
     let context = tauri::generate_context!();
 
@@ -42,7 +51,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             simple_command,
             command_with_message,
-            command_with_object
+            command_with_object,
+            command_with_error,
         ])
         .menu(if cfg!(target_os = "macos") {
             tauri::Menu::os_default(&context.package_info().name)

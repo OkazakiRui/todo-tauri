@@ -61,6 +61,15 @@ const TodoList: FC = () => {
   }).then((result) => {
     console.log({ result });
   });
+  for (let arg of [1, 2]) {
+    invoke('command_with_error', { arg })
+      .then((message) => {
+        console.log('command_with_success', message);
+      })
+      .catch((message) => {
+        console.error('command_with_error', message);
+      });
+  }
 
   return (
     <div>
