@@ -54,7 +54,12 @@ const TodoList: FC = () => {
 
   invoke('simple_command');
   invoke('command_with_message', { message: 'TypeScript' }).then((result) => {
-    console.log(result);
+    console.log({ result });
+  });
+  invoke('command_with_object', {
+    message: { field_str: 'some message', field_u32: 12 },
+  }).then((result) => {
+    console.log({ result });
   });
 
   return (
