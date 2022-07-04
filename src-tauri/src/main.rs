@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use tauri::Manager;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct MyMessage {
@@ -64,6 +65,15 @@ fn main() {
             tauri::Menu::os_default(&context.package_info().name)
         } else {
             tauri::Menu::default()
+        })
+        .setup(|app| {
+            let id = app.listen_global("front-to-back", |event| {
+                println!(
+                    "got front-to-back with payload {:?}",
+                    event.payload().unwrap()
+                )
+            });
+            Ok(())
         })
         .run(context)
         .expect("error while running tauri application");
