@@ -53,6 +53,9 @@ const TodoList: FC = () => {
   };
 
   invoke('simple_command');
+  invoke('command_with_message', { message: 'TypeScript' }).then((result) => {
+    console.log(result);
+  });
 
   return (
     <div>
