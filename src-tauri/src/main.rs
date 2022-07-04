@@ -42,6 +42,11 @@ fn command_with_error(arg: u32) -> Result<String, String> {
     }
 }
 
+#[tauri::command]
+async fn async_command(arg: u32) -> String {
+    "hello".into()
+}
+
 fn main() {
     let context = tauri::generate_context!();
 
@@ -53,6 +58,7 @@ fn main() {
             command_with_message,
             command_with_object,
             command_with_error,
+            async_command,
         ])
         .menu(if cfg!(target_os = "macos") {
             tauri::Menu::os_default(&context.package_info().name)

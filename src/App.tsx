@@ -70,6 +70,9 @@ const TodoList: FC = () => {
         console.error('command_with_error', message);
       });
   }
+  invoke('async_command', { arg: 12 }).then((result) => {
+    console.log(result);
+  });
 
   return (
     <div>
